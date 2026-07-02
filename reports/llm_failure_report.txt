@@ -1,0 +1,141 @@
+================================================================================
+Test Name : test_valid_login
+URL       : https://practicetestautomation.com/logged-in-successfully/
+Title     : Logged In Successfully | Practice Test Automation
+Screenshot: screenshots/test_valid_login.png
+
+Here's the analysis of the Selenium test failure:
+
+1.  **Root Cause:**
+    The test's assertion for the post-login success message does not match the actual message displayed by the application.
+
+2.  **Explanation:**
+    The `test_valid_login` is asserting that the string `'Dashboard'` should be present in the success message obtained via `get_success_message()`. However, the application, on the page `https://practicetestautomation.com/logged-in-successfully/`, clearly displays and returns the message `'Logged In Successfully'` (as confirmed by the URL, Page Title, and the `get_success_message()` output). Since `'Dashboard'` is not a substring of `'Logged In Successfully'`, the assertion fails.
+
+3.  **Suggested Fix:**
+    Update the assertion in `test_valid_login` to expect the correct success message. Change the assertion from `assert 'Dashboard' in get_success_message()` to `assert 'Logged In Successfully' in get_success_message()` (or `assert get_success_message() == 'Logged In Successfully'`) to match the application's actual behavior.
+
+================================================================================
+Test Name : test_valid_login
+URL       : https://practicetestautomation.com/logged-in-successfully/
+Title     : Logged In Successfully | Practice Test Automation
+Screenshot: screenshots/test_valid_login.png
+
+1.  **Root Cause:** Incorrect assertion text.
+2.  **Explanation:** The test correctly logs in and navigates to the success page, and `get_success_message()` retrieves the actual success message: "Logged In Successfully". However, the assertion is incorrectly expecting the text "Dashboard" to be present, which is not part of the actual success message on this specific page.
+3.  **Suggested Fix:** Update the assertion to expect the correct success message. For example, `assert 'Logged In Successfully' in get_success_message()` or `assert get_success_message() == 'Logged In Successfully'`.
+
+================================================================================
+Test Name : test_failure_demo
+================================================================================
+Test Name : test_llm_failure_explainer_demo
+URL       : https://practicetestautomation.com/logged-in-successfully/
+Title     : Logged In Successfully | Practice Test Automation
+Screenshot: screenshots/test_llm_failure_explainer_demo.png
+
+1.  **Root Cause:**
+    The test assertion expects to find the substring 'Dashboard' within the login success message, but the actual message displayed on the page and returned by `get_success_message()` is 'Logged In Successfully'.
+
+2.  **Explanation:**
+    The test `test_llm_failure_explainer_demo` failed because the `assert 'Dashboard' in 'Logged In Successfully'` statement evaluated to `False`. The current URL (`https://practicetestautomation.com/logged-in-successfully/`) and page title (`Logged In Successfully | Practice Test Automation`) confirm that the application correctly processed the login and displayed the "Logged In Successfully" message. The test's expectation (`'Dashboard'`) does not match the actual text displayed on this specific success page.
+
+3.  **Suggested Fix:**
+    Update the assertion to verify the correct success message displayed on the page. For example:
+    `assert 'Logged In Successfully' in get_success_message()`
+    or
+    `assert 'Logged In Successfully' == get_success_message()`
+
+================================================================================
+Test Name : test_llm_failure_explainer_demo
+URL       : https://practicetestautomation.com/logged-in-successfully/
+Title     : Logged In Successfully | Practice Test Automation
+Screenshot: screenshots/test_llm_failure_explainer_demo.png
+
+1.  **Root Cause:** Incorrect assertion expectation in the test. The test is asserting for the presence of 'Dashboard' in the success message, but the application displays 'Logged In Successfully'.
+
+2.  **Explanation:** The `get_success_message()` method successfully retrieves "Logged In Successfully" from the current page, which is correctly reflected by the URL and page title. The assertion `assert 'Dashboard' in 'Logged In Successfully'` then fails because the string 'Dashboard' is not a substring of the actual success message provided by the application. The test's expectation (looking for 'Dashboard') does not match the application's actual output ('Logged In Successfully').
+
+3.  **Suggested Fix:** Update the assertion to match the actual success message displayed by the application.
+    Change: `assert 'Dashboard' in get_success_message()`
+    To: `assert 'Logged In Successfully' in get_success_message()`
+    (or `assert get_success_message() == 'Logged In Successfully'` for an exact match).
+
+================================================================================
+Test Name : test_llm_failure_explainer_demo
+URL       : https://practicetestautomation.com/logged-in-successfully/
+Title     : Logged In Successfully | Practice Test Automation
+Screenshot: screenshots/test_llm_failure_explainer_demo.png
+
+1.  **Root Cause:** The test asserts for an incorrect success message.
+
+2.  **Explanation:** The `get_success_message()` method correctly retrieves the text "Logged In Successfully" from the UI after a successful login. However, the assertion `assert 'Dashboard' in 'Logged In Successfully'` fails because the string 'Dashboard' is not a substring of 'Logged In Successfully'. The test's expectation for the success message does not match the actual application behavior.
+
+3.  **Suggested Fix:** Update the test assertion to expect the actual success message.
+    *   Change `assert 'Dashboard' in get_success_message()` to `assert 'Logged In Successfully' in get_success_message()`.
+    *   Alternatively, for an exact match: `assert get_success_message() == 'Logged In Successfully'`.
+
+================================================================================
+Test Name : test_llm_failure_explainer_demo
+URL       : https://practicetestautomation.com/logged-in-successfully/
+Title     : Logged In Successfully | Practice Test Automation
+Screenshot: screenshots/test_llm_failure_explainer_demo.png
+
+1.  **Root Cause:** Incorrect assertion expectation.
+2.  **Explanation:** The test's assertion `assert 'Dashboard' in 'Logged In Successfully'` fails because the literal string "Dashboard" is not present within the actual success message "Logged In Successfully" returned by the `get_success_message()` method. The application successfully logs in and displays a "Logged In Successfully" message, but the test is incorrectly expecting the word "Dashboard" in that message.
+3.  **Suggested Fix:** Update the assertion to reflect the actual success message shown on the page. For example:
+    *   `assert 'Logged In Successfully' in get_success_message()`
+    *   Or, if `get_success_message()` is intended to return the *exact* message: `assert get_success_message() == 'Logged In Successfully'`
+
+================================================================================
+Test Name : test_valid_login
+URL       : https://practicetestautomation.com/logged-in-successfully
+Title     : 429 Too Many Requests
+Screenshot: screenshots/test_valid_login.png
+
+Here's the analysis:
+
+1.  **Root Cause:** Server-side rate limiting.
+2.  **Explanation:** The web server returned an HTTP 429 "Too Many Requests" status code. This indicates that the test (or previous test actions) has sent too many requests to the server in a given period, causing the server to temporarily block further requests and prevent the expected `logged-in-successfully` page from loading.
+3.  **Suggested Fix:**
+    *   Introduce explicit waits/delays between test steps or test cases.
+    *   Reduce the frequency of test runs or the number of concurrent tests hitting the same server.
+    *   Optimize test suite to minimize unnecessary requests.
+
+================================================================================
+Test Name : test_llm_failure_explainer_demo
+URL       : https://practicetestautomation.com/logged-in-successfully
+Title     : 429 Too Many Requests
+Screenshot: screenshots/test_llm_failure_explainer_demo.png
+
+Here's an analysis of the Selenium test failure:
+
+1.  **Root Cause:**
+    Rate limiting by the web server. The test, or a series of tests, made too many requests to `practicetestautomation.com` in a short period, leading the server to respond with an HTTP 429 "Too Many Requests" status.
+
+2.  **Explanation:**
+    Instead of loading the expected "logged-in-successfully" page, the browser received a "429 Too Many Requests" error page from the server, as indicated by the "Page Title: 429 Too Many Requests". This unexpected page content, or a subsequent attempt by the test to interact with it, likely caused `chromedriver` to crash, resulting in the generic `chromedriver!` stacktrace and empty message.
+
+3.  **Suggested Fix:**
+    Implement delays between test actions or individual tests that interact with the same domain (e.g., using `time.sleep()` or longer explicit waits). Review test execution frequency. If possible, configure a test environment with relaxed rate limits or communicate with the site administrators about increasing the limit for your automation IP(s). Also, add assertions for expected page titles/elements to catch such errors gracefully.
+
+================================================================================
+Test Name : test_llm_failure_explainer_demo
+URL       : https://practicetestautomation.com/logged-in-successfully/
+Title     : Logged In Successfully | Practice Test Automation
+Screenshot: screenshots/test_llm_failure_explainer_demo.png
+
+Here's the analysis:
+
+1.  **Root Cause:**
+    The test's assertion expects the string 'Dashboard' to be part of the success message after login, but the actual success message displayed by the application is 'Logged In Successfully'.
+
+2.  **Explanation:**
+    The test navigated successfully to `https://practicetestautomation.com/logged-in-successfully/` and received the success message "Logged In Successfully". However, the assertion `assert 'Dashboard' in 'Logged In Successfully'` failed because the substring 'Dashboard' is not present in "Logged In Successfully". The application behaved correctly; the test has an outdated or incorrect expectation for the success message content.
+
+3.  **Suggested Fix:**
+    Update the assertion in `test_llm_failure_explainer_demo` to check for the correct success message. Change:
+    `assert 'Dashboard' in login_page.get_success_message()`
+    To:
+    `assert 'Logged In Successfully' in login_page.get_success_message()`
+    (Or `assert login_page.get_success_message() == 'Logged In Successfully'` if an exact match is desired).
+
